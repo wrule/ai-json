@@ -1,28 +1,39 @@
 import 'dotenv/config';
 import { z } from 'zod';
+import { zerialize, dezerialize } from 'zodex';
 import { generateText } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
 
-const openrouter = createOpenRouter({
-  apiKey: process.env.OPENROUTER_API_KEY,
-});
+export function zodStringify(zodSchema: z.ZodAny) {
+  return JSON.stringify(zerialize(zodSchema));
+}
 
-async function main() {
-  const parser = StructuredOutputParser.fromZodSchema(z.object({
-    recipe: z.object({
-      name: z.string(),
-      ingredients: z.array(z.string()),
-      steps: z.array(z.string()),
-    }),
-  }));
+export function zodParse(json: string) {
+  return dezerialize(JSON.parse(json));
+}
+
+async function generateObject(
+  openrouterApiKey: string,
+  modelName: string,
+  zodSchemaString: string,
+) {
+  const openrouter = createOpenRouter({
+    apiKey: openrouterApiKey,
+  });
+  const zodSchema = zodParse(zodSchemaString);
+  const parser = StructuredOutputParser.fromZodSchema(zodSchema);
   const formatInstructions = parser.getFormatInstructions();
   const { text } = await generateText({
-    model: openrouter('anthropic/claude-sonnet-4.5'),
+    model: openrouter(modelName),
     prompt: formatInstructions,
   });
-  const { recipe } = await parser.parse(text);
-  console.log(recipe);
+  return await parser.parse(text);
+}
+
+async function main() {
+  const result = await generateObject(process.env.OPENROUTER_API_KEY!, '', '');
+  console.log(result);
 }
 
 main();

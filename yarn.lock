@@ -495,6 +495,11 @@ tsx@^4.20.6:
   optionalDependencies:
     fsevents "~2.3.3"
 
+type-fest@^4.41.0:
+  version "4.41.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.41.0.tgz#6ae1c8e5731273c2bf1f58ad39cbae2c91a46c58"
+  integrity sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==
+
 undici-types@~6.21.0:
   version "6.21.0"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.21.0.tgz#691d00af3909be93a7faa13be61b3a5b50ef12cb"
@@ -510,7 +515,15 @@ uuid@^9.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
-"zod@^3.25.0 || ^4.0.0", "zod@^3.25.76 || ^4", zod@^4.1.13:
+"zod@^3.25.0 || ^4.0.0", "zod@^3.25.76 || ^4", zod@^4.0.15, zod@^4.1.13:
   version "4.1.13"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.1.13.tgz#93699a8afe937ba96badbb0ce8be6033c0a4b6b1"
   integrity sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==
+
+zodex@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/zodex/-/zodex-4.0.1.tgz#21078769a9427350614ffd1d6b6eaf54b579038c"
+  integrity sha512-U+rgGGedLDZIVsou0SHejsnn5A8+08KVcHGZdCRA3dR+VLVlBWsirZN6g48HzkttSiotcYMyDfgp0W/Vf7FoAQ==
+  dependencies:
+    type-fest "^4.41.0"
+    zod "^4.0.15"
