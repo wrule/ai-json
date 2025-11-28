@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import { z } from 'zod';
-import { zerialize, dezerialize } from 'zodex';
+import { zerialize, dezerialize, ZodTypes } from 'zodex';
 import { generateText } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
 
-export function zodStringify(zodSchema: z.ZodAny) {
+export function zodStringify(zodSchema: ZodTypes) {
   return JSON.stringify(zerialize(zodSchema));
 }
 
@@ -16,7 +16,7 @@ export function zodParse(json: string) {
 async function generateObject(
   openrouterApiKey: string,
   modelName: string,
-  zodSchema: z.ZodAny,
+  zodSchema: z.ZodTypeAny,
 ) {
   const openrouter = createOpenRouter({
     apiKey: openrouterApiKey,
@@ -31,7 +31,10 @@ async function generateObject(
 }
 
 async function main() {
-  const result = await generateObject(process.env.OPENROUTER_API_KEY!, '', '');
+  const result = await generateObject(process.env.OPENROUTER_API_KEY!, 'gpt-4', z.object({
+    name: z.string(),
+    age: z.number(),
+  }));
   console.log(result);
 }
 
