@@ -16,12 +16,11 @@ export function zodParse(json: string) {
 async function generateObject(
   openrouterApiKey: string,
   modelName: string,
-  zodSchemaString: string,
+  zodSchema: z.ZodAny,
 ) {
   const openrouter = createOpenRouter({
     apiKey: openrouterApiKey,
   });
-  const zodSchema = zodParse(zodSchemaString);
   const parser = StructuredOutputParser.fromZodSchema(zodSchema);
   const formatInstructions = parser.getFormatInstructions();
   const { text } = await generateText({
