@@ -13,7 +13,7 @@ export function zodParse(json: string) {
   return dezerialize(JSON.parse(json));
 }
 
-async function generateObject(
+export async function generateObject(
   openrouterApiKey: string,
   modelName: string,
   zodSchema: z.ZodTypeAny,
