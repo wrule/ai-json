@@ -30,11 +30,20 @@ export async function generateObject(
   return await parser.parse(text);
 }
 
+export async function generateObjectByJSON(
+  openrouterApiKey: string,
+  modelName: string,
+  json: string,
+) {
+  return await generateObject(openrouterApiKey, modelName, zodParse(json));
+}
+
 async function main() {
-  const result = await generateObject(process.env.OPENROUTER_API_KEY!, 'gpt-4', z.object({
+  const json = zodStringify(z.object({
     name: z.string(),
     age: z.number(),
   }));
+  const result = await generateObjectByJSON(process.env.OPENROUTER_API_KEY!, 'gpt-4', json);
   console.log(result);
 }
 
