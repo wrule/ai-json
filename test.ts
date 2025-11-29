@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import 'dotenv/config';
+import { z } from '.';
 import { zodStringify } from '.';
 import { generateObjectByJSON } from '.';
 

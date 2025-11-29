@@ -1,9 +1,10 @@
-import 'dotenv/config';
 import { z } from 'zod';
 import { zerialize, dezerialize, ZodTypes } from 'zodex';
 import { generateText } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { StructuredOutputParser } from '@langchain/core/output_parsers';
+
+export { z } from 'zod';
 
 export function zodStringify(zodSchema: ZodTypes) {
   return JSON.stringify(zerialize(zodSchema));
