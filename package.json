@@ -2,6 +2,9 @@
   "name": "ai-json",
   "version": "1.0.0",
   "main": "index.ts",
+  "scripts": {
+    "test": "tsx test.ts"
+  },
   "repository": "https://github.com/wrule/ai-json.git",
   "author": "36000.eth <1982775886@qq.com>",
   "license": "MIT",
