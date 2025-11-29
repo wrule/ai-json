@@ -17,6 +17,8 @@ export async function generateObject(
   openrouterApiKey: string,
   modelName: string,
   zodSchema: z.ZodTypeAny,
+  prompt?: string,
+  suffixPrompt?: string,
 ) {
   const openrouter = createOpenRouter({
     apiKey: openrouterApiKey,
@@ -25,7 +27,7 @@ export async function generateObject(
   const formatInstructions = parser.getFormatInstructions();
   const { text } = await generateText({
     model: openrouter(modelName),
-    prompt: formatInstructions,
+    prompt: `${prompt}\n\n${formatInstructions}${suffixPrompt ? `\n\n${suffixPrompt}` : ''}`,
   });
   return await parser.parse(text);
 }
@@ -34,8 +36,10 @@ export async function generateObjectByJSON(
   openrouterApiKey: string,
   modelName: string,
   json: string,
+  prompt?: string,
+  suffixPrompt?: string,
 ) {
-  return await generateObject(openrouterApiKey, modelName, zodParse(json));
+  return await generateObject(openrouterApiKey, modelName, zodParse(json), prompt, suffixPrompt);
 }
 
 async function main() {
