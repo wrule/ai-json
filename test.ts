@@ -1,14 +1,14 @@
 import 'dotenv/config';
 import { z } from '.';
 import { zodStringify } from '.';
-import { generateObjectByJSON } from '.';
+import { generateObjectByJSON } from './ollama';
 
 async function main() {
   const json = zodStringify(z.object({
     name: z.string(),
     age: z.number(),
   }));
-  const result = await generateObjectByJSON(process.env.OPENROUTER_API_KEY!, 'gpt-4', json);
+  const result = await generateObjectByJSON('http://192.168.0.106:11434/api', 'qwen3:14b', json);
   console.log(result);
 }
 
