@@ -8,8 +8,9 @@ async function main() {
     name: z.string(),
     age: z.number(),
   }));
+  const time = Date.now();
   const result = await generateObjectByJSON('http://192.168.0.106:11434/api', 'qwen3:14b', json);
-  console.log(result);
+  console.log(result, Date.now() - time);
 }
 
 main();
