@@ -16,9 +16,9 @@ async function main() {
     'qwen3:14b',
     z.object({
       type: z.enum(['feat', 'fix', 'chore']),
-      message: z.string(),
+      message: z.string().max(128),
     }),
-    `以下是执行 git diff --staged 的结果：\n\n${diff}，请确定 commit type 之后，用中文写一个 commit message，要求包含精准的关键词，有利于之后搜索`,
+    `以下是执行 git diff --staged 的结果：\n\n${diff}，请确定 commit type 之后，用中文写一个 commit message，要求包含精准的关键词，有利于之后搜索，要求长度小于 100 个字符`,
   );
   console.log(result);
 }
