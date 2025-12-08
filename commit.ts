@@ -13,7 +13,7 @@ async function main() {
   const diff = getStagedDiff();
   const result = await generateObject(
     'http://192.168.0.105:11434/api',
-    'gpt-oss:20b',
+    'qwen2.5-coder:7b',
     z.object({
       type: z.enum(['feat', 'fix', 'chore']),
       message: z.string().max(128),
