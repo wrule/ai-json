@@ -17,7 +17,7 @@ async function main() {
     z.object({
       commitMessage: z.string(),
     }),
-    `以下是执行 git diff --staged 的结果：\n\n${diff}，请写一个 commit message`,
+    `以下是执行 git diff --staged 的结果：\n\n${diff}，请用中文写一个 commit message`,
   );
   console.log(result);
 }
